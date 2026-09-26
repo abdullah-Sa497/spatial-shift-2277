@@ -825,6 +825,19 @@ html:not(.anim) .loader, .no-loader .loader { display: none; }
 .anim .xp__canvas { display: block; opacity: 0; transition: opacity .4s; }
 .anim .xp__canvas.is-ready { opacity: 1; }
 .anim .xp__shade { opacity: 0; }
+/* A sheer ivory veil over the closed window keeps the headline legible over
+   the photo; it lifts as the window opens (see main.js). */
+.xp__veil { display: none; }
+.anim .xp__veil {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--bg);
+  opacity: .34;
+  pointer-events: none;
+}
+@media (max-width: 767.98px) { .anim .xp__veil { opacity: .46; } }
 
 .anim .xp__head {
   inset: 0;
@@ -864,6 +877,13 @@ html:not(.anim) .loader, .no-loader .loader { display: none; }
   line-height: .9;
 }
 .anim .xp__title em { color: var(--accent); }
+/* Soft ivory halo: invisible on the page, separates letters from the photo */
+.anim .xp__title {
+  text-shadow:
+    0 0 2px rgba(245, 240, 232, .55),
+    0 0 18px rgba(245, 240, 232, .8),
+    0 0 42px rgba(245, 240, 232, .55);
+}
 .anim .xp__a, .anim .xp__b {
   overflow: hidden;
   padding: .06em .12em .16em;

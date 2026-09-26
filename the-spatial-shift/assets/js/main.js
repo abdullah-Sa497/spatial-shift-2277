@@ -67,8 +67,15 @@
         bar.classList.toggle('is-visible', scrollY > 480 && !footerInView);
       }, { rootMargin: '0px 0px -15% 0px' }).observe(footer);
     }
+    // On the home page the hero carries its own calls to action, so the bar
+    // waits until the pinned hero has scrolled away.
+    const heroXp = $('.xp[data-hero]');
     onScroll(() => {
-      const past = scrollY > 480;
+      let past = scrollY > 480;
+      if (heroXp) {
+        const holder = heroXp.parentElement.classList.contains('pin-spacer') ? heroXp.parentElement : heroXp;
+        past = holder.getBoundingClientRect().bottom < window.innerHeight * 0.5;
+      }
       if (wa) wa.classList.toggle('is-visible', past);
       if (bar) bar.classList.toggle('is-visible', past && !footerInView);
     });
@@ -524,6 +531,7 @@
       const metaB = $('.xp__meta-b', section);
       const kicker = $('.xp__kicker', section);
       const shade = $('.xp__shade', section);
+      const veil = $('.xp__veil', section);
       const content = $('.xp__content', section);
       const dialLabel = $('[data-dial-label]', section);
       const dialBar = $('[data-dial-bar]', section);
@@ -596,6 +604,7 @@
       if (kicker) tl.to(kicker, { y: -24, autoAlpha: 0, duration: 0.35 }, 0);
       if (metaA) tl.to(metaA, { x: () => -window.innerWidth * 0.3, autoAlpha: 0, duration: 0.7 }, 0);
       if (metaB) tl.to(metaB, { x: () => window.innerWidth * 0.3, autoAlpha: 0, duration: 0.7 }, 0);
+      if (veil) tl.to(veil, { opacity: 0, duration: 0.55, ease: 'power1.out' }, 0);
       if (shade) tl.to(shade, { opacity: 1, duration: 0.45 }, 0.7);
       if (content) {
         tl.fromTo(content, { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.45, ease: 'power2.out' }, 1);
