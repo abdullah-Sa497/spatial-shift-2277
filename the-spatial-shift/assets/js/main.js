@@ -157,6 +157,8 @@
     };
 
     btn.addEventListener('click', () => (isOpen() ? close() : open()));
+    const scrim = $('[data-menu-scrim]');
+    if (scrim) scrim.addEventListener('click', () => close());
     $$('a', menu).forEach((a) => a.addEventListener('click', () => close(false)));
 
     d.addEventListener('keydown', (e) => {
