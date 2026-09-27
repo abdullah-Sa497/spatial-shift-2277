@@ -1603,6 +1603,9 @@ details[open]::details-content { block-size: auto; }
   line-height: .95;
   letter-spacing: -.03em;
 }
+/* Breadcrumb over the photo: brighter, softly shadowed, and a 44px tap area */
+.project-hero__content .label { color: rgba(242, 235, 224, .92); text-shadow: 0 1px 14px rgba(0, 0, 0, .5); }
+.project-hero__content .label a { display: inline-block; padding: .8rem 0; margin: -.8rem 0; }
 .project-hero__summary { max-width: 44ch; margin-top: 1.5rem; font-size: var(--fs-lg); color: rgba(242, 235, 224, .88); }
 
 .meta-grid {
