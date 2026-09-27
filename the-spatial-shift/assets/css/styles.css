@@ -1789,7 +1789,7 @@ details[open]::details-content { block-size: auto; }
   font-size: 1.0625rem;
   transition: border-color .3s, box-shadow .3s;
 }
-.input::placeholder { color: #8E847A; }
+.input::placeholder { color: #766C62; } /* 4.8:1 on the form card */
 .input:hover { border-bottom-color: var(--ink-soft); }
 .input:focus { outline: none; border-bottom-color: var(--ink); box-shadow: 0 1px 0 0 var(--ink); }
 textarea.input { min-height: 140px; padding-top: .9rem; line-height: 1.6; resize: vertical; }
