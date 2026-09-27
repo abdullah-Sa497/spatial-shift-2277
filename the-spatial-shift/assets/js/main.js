@@ -693,13 +693,13 @@
         if (v === current) return;
         current = v;
         body.style.backgroundColor = v === 0 ? '' : mix(v);
+        // Section text only appears once the page is dark enough to carry it
+        proc.style.setProperty('--shift-text', Math.max(0, Math.min(1, (v - 0.35) / 0.5)).toFixed(3));
       };
       // Measured from where the section (or its pin spacer) really is on screen:
       // darkens as it rises from 90% to 30% of the viewport, lightens only as
       // its bottom edge leaves (70% to 15%). Fully dark while pinned.
-      let queued = false;
       const update = () => {
-        queued = false;
         const H = window.innerHeight;
         // The pin spacer (desktop) spans the whole pinned distance; use it when present
         const holder = proc.parentElement.classList.contains('pin-spacer') ? proc.parentElement : proc;
@@ -708,10 +708,11 @@
         const leave = (box.bottom - H * 0.15) / (H * 0.55);
         setShade(Math.min(enter, leave, 1));
       };
-      const request = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
-      addEventListener('scroll', request, { passive: true });
-      addEventListener('resize', request, { passive: true });
-      ScrollTrigger.addEventListener('refresh', request);
+      // Runs straight from the scroll event (one cheap rect read), so the
+      // text can never be left hidden if animation frames are throttled.
+      addEventListener('scroll', update, { passive: true });
+      addEventListener('resize', update, { passive: true });
+      ScrollTrigger.addEventListener('refresh', update);
       update();
     }
 

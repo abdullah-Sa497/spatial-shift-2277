@@ -1205,6 +1205,7 @@ html:not(.anim) .loader, .no-loader .loader { display: none; }
 /* With motion on, the section is transparent and the page background itself
    shifts to espresso (see main.js); without motion it keeps its own dark fill. */
 .anim .process { background: transparent; }
+.anim .process__inner { opacity: var(--shift-text, 1); }
 .process__inner { padding-block: var(--section); }
 .process__track { display: grid; }
 .process__steps {
